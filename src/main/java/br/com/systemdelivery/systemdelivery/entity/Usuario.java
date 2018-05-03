@@ -1,12 +1,15 @@
 package br.com.systemdelivery.systemdelivery.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.br.CPF;
@@ -36,6 +39,10 @@ public class Usuario implements Serializable {
     
     @Column(name = "AC_USUARIO", nullable = false)
     private Boolean acessoUsuario;
+    
+    @Column(name = "DT_USUARIO", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataCadastro;
 
     public Long getCodigoUsuario() {
         return codigoUsuario;
@@ -75,5 +82,13 @@ public class Usuario implements Serializable {
 
     public void setAcessoUsuario(Boolean acessoUsuario) {
         this.acessoUsuario = acessoUsuario;
+    }
+
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 }

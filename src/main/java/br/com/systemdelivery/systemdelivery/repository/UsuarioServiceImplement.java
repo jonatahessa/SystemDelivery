@@ -5,6 +5,7 @@ import br.com.systemdelivery.systemdelivery.service.UsuarioService;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -24,6 +25,7 @@ public class UsuarioServiceImplement implements UsuarioService {
     }
 
     @Override
+    @Transactional
     public void incluir(Usuario usuario) {
         entityManager.persist(usuario);
     }
