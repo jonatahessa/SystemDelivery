@@ -27,14 +27,13 @@ public class Usuario implements Serializable {
     @Column(name = "NM_USUARIO", nullable = false)
     private String nomeUsuario;
     
-    @CPF
     @Size(min = 14, max = 14)
-    @Column(name = "CP_USUARIO", nullable = false, unique = true)
+    @Column(name = "CP_USUARIO", nullable = false, unique = false)
     private String cpfUsuario;
     
     @Email
     @Size(min = 3, max = 100)
-    @Column(name = "EM_USUARIO", nullable = false, unique = true)
+    @Column(name = "EM_USUARIO", nullable = false, unique = false)
     private String emailUsuario;
     
     @Column(name = "AC_USUARIO", nullable = false)

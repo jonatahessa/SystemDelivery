@@ -2,6 +2,7 @@ package br.com.systemdelivery.systemdelivery.controller;
 
 import br.com.systemdelivery.systemdelivery.entity.Usuario;
 import br.com.systemdelivery.systemdelivery.service.UsuarioService;
+import java.sql.SQLException;
 import java.util.Date;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +20,18 @@ public class GerenciaUsuario {
     
     @Autowired
     private UsuarioService usuarioService;
-
+    
     @RequestMapping
     public ModelAndView cadastro() {
         return new ModelAndView("cadastro")
                 .addObject("usuario", new Usuario());
     }
-
+    
     @RequestMapping(value = "/salvar", method = RequestMethod.POST)
     public ModelAndView salvar(
             @ModelAttribute("usuario") @Valid Usuario usuario,
             BindingResult bindingResult,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes) throws SQLException {
         if (bindingResult.hasErrors()) {
             return new ModelAndView("cadastro")
                     .addObject("usuario", usuario);
@@ -40,7 +41,8 @@ public class GerenciaUsuario {
         usuario.setDataCadastro(new Date());
         
         if (inclusao) {
-            usuarioService.incluir(usuario);
+            
+            br.com.systemdelivery.systemdelivery.utils.DataBaseControl.createDatabase(usuario.getNomeUsuario());
         }
         
         return new ModelAndView("redirect:/");
